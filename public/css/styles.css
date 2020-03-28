@@ -1,0 +1,19 @@
+form{
+    margin: auto;
+    width: 90%;
+    position: relative;
+    padding: 5px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .filter-form {
+      width: 50% !important;
+      text-align: center !important;
+      margin: 0 auto;
+  }
+
+  .card {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.22);
+  }
