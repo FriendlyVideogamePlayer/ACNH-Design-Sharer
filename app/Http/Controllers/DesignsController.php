@@ -22,11 +22,11 @@ class DesignsController extends Controller
         
     }
 
-    public function searchDesigns()
+    public function searchDesigns(Request $request)
     {
         // Searches the DB for any design title containg search query
-        $searchTerm = '';
-        $designs = DB::table('designs')->where('title', 'LIKE', '%'.$searchTerm.'%')->get();
+        $inputs = $request->input();
+        $designs = DB::table('designs')->where('title', 'LIKE', '%'.$request->filterInput.'%')->get();
         return view('designCatalogue')->with('designs',$designs);
     }
 
@@ -59,7 +59,7 @@ class DesignsController extends Controller
      */
     public function show($id)
     {
-        // View a single desing - useful for linking to friends
+        // View a single design - useful for linking to friends
         $design = Design::find($id);
         return view('designSingle')->with('design', $design);
     }

@@ -25,4 +25,6 @@ Route::get('/upload', function () {
     return view('upload');
 });
 
+Route::post('/designs/search', 'DesignsController@searchDesigns');
+
 Route::resource('designs', 'DesignsController');
