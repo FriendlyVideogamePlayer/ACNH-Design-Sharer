@@ -5,11 +5,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="designs">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item {{ Request::is('/designs') ? 'active' : '' }}">
+        <a class="nav-link" href="http://localhost/ACNH-DesignSharer/public/designs">Home </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="upload">Upload a design</a>
+      <li class="nav-item {{ Request::is('/upload') ? 'active' : '' }}">
+        <a class="nav-link" href="http://localhost/ACNH-DesignSharer/public/upload">Upload a design </a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

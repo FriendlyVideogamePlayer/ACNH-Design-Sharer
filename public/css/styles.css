@@ -16,4 +16,19 @@ form{
 
   .card {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.22);
+    opacity: 1;
+  }
+
+  .cardLink {
+    text-decoration: none !important;
+    color: black;
+  }
+
+  .cardHover:hover {
+    transition: 0.4s;
+    opacity: 0.7;
+  }
+
+  A:hover {
+    color: black;
   }
