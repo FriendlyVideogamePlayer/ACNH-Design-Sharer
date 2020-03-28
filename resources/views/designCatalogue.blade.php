@@ -17,7 +17,8 @@
                         <p class="card-text">{{$design->description}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Uploaded by {{$design->username}}</small>
+                        <small class="text-muted">Uploaded by {{$design->username}}</small> <br>
+                        <small class="text-muted">Design type: {{$design->designtype}}</small>
                     </div>
                 </a>
             </div>

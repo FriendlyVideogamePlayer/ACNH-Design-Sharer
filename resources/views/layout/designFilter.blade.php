@@ -10,8 +10,11 @@
                     <label for="typeSelect">Item type</label>
                     <select name="filterSelect" class="form-control" id="typeSelect">
                         <option>Choose a type</option>
-                        <option>Top</option>
-                        <option>Dress</option>
+                        <option value="Top">Top (Custom Design Pro editor needed)</option>
+                        <option value="Dress">Dress (Custom Design Pro editor needed)</option>
+                        <option value="Headwear">Headwear (Custom Design Pro editor needed)</option>
+                        <option value="Standard Design">Standard Design</option>
+                        <option value="Room Design">Room Design</option>
                     </select>
             </div>
         </div>

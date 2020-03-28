@@ -26,7 +26,10 @@ class DesignsController extends Controller
     {
         // Searches the DB for any design title containg search query
         $inputs = $request->input();
-        $designs = DB::table('designs')->where('title', 'LIKE', '%'.$request->filterInput.'%')->paginate(8);
+        $designs = DB::table('designs')
+            ->where('title', 'LIKE', '%'.$request->filterInput.'%')
+            ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+            ->paginate(8);
         return view('designCatalogue')->with('designs',$designs);
     }
 
@@ -58,6 +61,7 @@ class DesignsController extends Controller
         $design->username = $request->input('username');
         $design->title = $request->input('title');
         $design->description = $request->input('description');
+        $design->designtype = $request->input('designType');
         $design->save();
         
         return redirect('/designs')->with('success', 'Design added!');

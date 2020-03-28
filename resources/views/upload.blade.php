@@ -31,7 +31,7 @@
                 <div class="row"> 
                     <div class="col-xs-12 col-md-12  pt-3">
                     {{Form::label('designType', 'Type of Design')}}    
-                    {!! Form::select('designType',['Top' => 'Top','Coat'=>'Coat'],'Top',['class'=>'form-control','placeholder'=>'Select type']) !!}
+                    {!! Form::select('designType',['Top' => 'Top (Custom Design Pro editor needed)','Dress'=>'Dress (Custom Design Pro editor needed)','Headwear'=>'Headwear (Custom Design Pro editor needed)','Standard Design'=>'Standard Design','Room Design'=>'Room Design'],'Top',['class'=>'form-control','placeholder'=>'Select type']) !!}
                     </div>
                 </div>
                 <div class="row"> 

@@ -4,7 +4,7 @@
 
 <footer class="bd-footer text-muted">
   <div class="container-fluid pt-3 pt-md-3">
-    <p>Designed by FriendlyVideogamePlayer | <a href="https://github.com/FriendlyVideogamePlayer/ACNH-Design-Sharer">View on GitHub</a> </p>
+    <p>Created by FriendlyVideogamePlayer | <a href="https://github.com/FriendlyVideogamePlayer/ACNH-Design-Sharer">View on GitHub</a> </p>
   </div>
 </footer>
 
