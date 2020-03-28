@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/designs', function () {
+Route::get('/designCatalogue', function () {
     return view('designCatalogue');
 });
 
 Route::get('/upload', function () {
     return view('upload');
 });
+
+Route::resource('designs', 'DesignsController');
