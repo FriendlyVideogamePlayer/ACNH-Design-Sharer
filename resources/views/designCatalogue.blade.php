@@ -24,9 +24,9 @@
     
         @endforeach
     </div>
-        @if(count($designs) > 8)
+
             {{$designs->links()}}
-        @endif
+
     @else
         <p> No designs found :( </p>
     @endif

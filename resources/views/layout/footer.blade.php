@@ -1,6 +1,6 @@
 <footer class="bd-footer text-muted">
   <div class="container-fluid p-3 p-md-3">
-    <p>Designed by FriendlyVideogamePlayer    <a href="https://github.com/FriendlyVideogamePlayer">View on GitHub</a> </p>
+    <p>Designed by FriendlyVideogamePlayer    <a href="https://github.com/FriendlyVideogamePlayer/ACNH-Design-Sharer">View on GitHub</a> </p>
   </div>
 </footer>
 

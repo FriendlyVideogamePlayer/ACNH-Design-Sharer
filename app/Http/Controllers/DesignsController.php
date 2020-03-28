@@ -17,7 +17,7 @@ class DesignsController extends Controller
     {
         //Takes all of the designs from the DB and displays them on the main catalogue
         //$designs = Design::all();
-        $designs = DB::table('designs')->paginate(2);
+        $designs = DB::table('designs')->paginate(8);
         return view('designCatalogue')->with('designs',$designs);
         
     }
@@ -26,7 +26,7 @@ class DesignsController extends Controller
     {
         // Searches the DB for any design title containg search query
         $inputs = $request->input();
-        $designs = DB::table('designs')->where('title', 'LIKE', '%'.$request->filterInput.'%')->get();
+        $designs = DB::table('designs')->where('title', 'LIKE', '%'.$request->filterInput.'%')->paginate(8);
         return view('designCatalogue')->with('designs',$designs);
     }
 

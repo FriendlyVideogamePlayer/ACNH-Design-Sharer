@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="col py-3">
-            <button type="submit">Search!</button>
+            <button type="submit" class="btn btn-primary">Search!</button>
         </div>
     </form>
 </div>
