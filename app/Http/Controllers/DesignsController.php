@@ -48,7 +48,19 @@ class DesignsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Adds a new design to the DB
+        $this->validate($request, [
+            'username' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+        $design = new Design;
+        $design->username = $request->input('username');
+        $design->title = $request->input('title');
+        $design->description = $request->input('description');
+        $design->save();
+        
+        return redirect('/designs')->with('success', 'Design added!');
     }
 
     /**

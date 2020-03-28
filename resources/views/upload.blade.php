@@ -6,43 +6,40 @@
 <body>
 <div class="form">
     <div class="container">
-        <form id="uploadInput" class="formStyle" action="" method="">
-            <div class="row"> 
-                <div class="col-xs-12 col-md-12 pt-3">
-                        <label for="nameInput">Name</label>
-                        <input type="text" class="form-control" id="nameInput" placeholder="The name you want displayed on your submission">
+        @include('layout.warnings')
+        {!! Form::open(['action' => 'DesignsController@store', 'method' => 'POST']) !!}
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-12 pt-3">
+                        {{Form::label('username', 'Name')}}
+                        {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => 'The name you want displayed on your submission'])}}
+                    </div>
+                    <div class="col-xs-12 col-md-12  pt-3">
+                        {{Form::label('title', 'Title')}}
+                        {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'The title you want displayed on your submission'])}}
+                    </div>
                 </div>
-                <div class="col-xs-12 col-md-12  pt-3">
-                        <label for="titleInput">Title</label>
-                        <input type="text" class="form-control" id="titleInput" placeholder="The title you want displayed on your submission">
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-12  pt-3">
+                        {{Form::label('description', 'Description')}}
+                        {{Form::text('description', '', ['class' => 'form-control', 'placeholder' => 'The description you want displayed under your submission'])}}
+                    </div>
+                    <div class="col-xs-12 col-md-12  pt-3">
+                        {{Form::label('imageLink', 'Image link')}}
+                        {{Form::text('imageLink', '', ['class' => 'form-control', 'placeholder' => 'A link to the image of your design'])}}
+                    </div>
                 </div>
-            </div>
-            <div class="row"> 
-                <div class="col-xs-12 col-md-12  pt-3">
-                        <label for="descriptionInput">Description</label>
-                        <input type="textarea" class="form-control" id="descriptionInput" placeholder="The description you want displayed under your submission">
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-12  pt-3">
+                    {{Form::label('designType', 'Type of Design')}}    
+                    {!! Form::select('designType',['Top' => 'Top','Coat'=>'Coat'],'Top',['class'=>'form-control','placeholder'=>'Select type']) !!}
+                    </div>
                 </div>
-                <div class="col-xs-12 col-md-12  pt-3">
-                        <label for="imageInput">Image link</label>
-                        <input type="text" class="form-control" id="imageInput" placeholder="A link to the image of your design">
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-12  pt-3">
+                        {{Form::submit('submit', ['class' => 'btn btn-primary'])}}
+                    </div>
                 </div>
-            </div>
-            <div class="row"> 
-                <div class="col-xs-12 col-md-12  pt-3">
-                    <label for="categorySelect">Clothing type select</label>
-                    <select class="form-control" id="categorySelect">
-                    <option>Top</option>
-                    <option>Dress</option>
-                    <option>Legs</option>
-                    </select>
-                </div>
-           </div>
-            <div class="row"> 
-                <div class="col-xs-12 col-md-12  pt-3">
-                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-                </div>
-            </div>
-        </form>
+        {!! Form::close() !!}
     </div>
 </div>
 
