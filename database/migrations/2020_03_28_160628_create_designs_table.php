@@ -19,6 +19,19 @@ class CreateDesignsTable extends Migration
             $table->string('title');
             $table->mediumText('description');
             $table->string('username');
+            $table->string('designtype');
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
+        });
+
+        // Create a DB containg the correct fields
+        Schema::create('uploads', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->mediumText('description');
+            $table->string('username');
+            $table->string('designtype');
+            $table->dateTime('updated_at');
             $table->dateTime('created_at');
         });
     }

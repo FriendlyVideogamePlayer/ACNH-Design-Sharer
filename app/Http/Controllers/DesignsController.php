@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Design;
+use App\Upload;
 use Illuminate\Support\Facades\DB;
 
 class DesignsController extends Controller
@@ -57,12 +58,12 @@ class DesignsController extends Controller
             'title' => 'required',
             'description' => 'required'
         ]);
-        $design = new Design;
-        $design->username = $request->input('username');
-        $design->title = $request->input('title');
-        $design->description = $request->input('description');
-        $design->designtype = $request->input('designType');
-        $design->save();
+        $upload = new Upload;
+        $upload->username = $request->input('username');
+        $upload->title = $request->input('title');
+        $upload->description = $request->input('description');
+        $upload->designtype = $request->input('designType');
+        $upload->save();
         
         return redirect('/designs')->with('success', 'Design added!');
     }
