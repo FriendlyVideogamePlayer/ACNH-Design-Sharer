@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/designs', function () {
     return view('designCatalogue');
 });
+
+Route::get('/upload', function () {
+    return view('upload');
+});
