@@ -6,12 +6,17 @@
 <body>
 <div class="form">
     <div class="container">
+        @isset($errorMessage)
+            <div class="alert alert-danger" role="alert" style="text-align:center;">
+                {{$errorMessage}}
+            </div>
+        @endisset
         @isset($successMessage)
             <div class="alert alert-success" role="alert" style="text-align:center;">
                 {{$successMessage}}
             </div>
         @endisset
-        
+
         @include('layout.warnings')
         {!! Form::open(['action' => 'DesignsController@store', 'method' => 'POST']) !!}
                 <div class="row"> 

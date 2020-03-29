@@ -18,7 +18,7 @@ class DesignsController extends Controller
     {
         //Takes all of the designs from the DB and displays them on the main catalogue
         //$designs = Design::all();
-        $designs = DB::table('designs')->paginate(8);
+        $designs = DB::table('designs')->paginate(9);
         return view('designCatalogue')->with('designs',$designs);
         
     }
@@ -31,14 +31,14 @@ class DesignsController extends Controller
         //var_dump($request->filterInput);
         // If both fields are empty but a search is made -> return all as usual
         if($request->filterInput === NULL && $request->filterSelect === "All") {
-            $designs = DB::table('designs')->paginate(8);
+            $designs = DB::table('designs')->paginate(9);
             
         }
         // If search field is empty but a design type selected -> show designs with that type
         elseif($request->filterInput === NULL) {
             $designs = DB::table('designs')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
-                ->paginate(8);
+                ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
         // If select is empty but search field isn't -> show designs including search term
@@ -46,7 +46,7 @@ class DesignsController extends Controller
             $designs = DB::table('designs')
                 ->where('title', 'LIKE', '%'.$request->filterInput.'%')
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
-                ->paginate(8);
+                ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
         // If select and search field aren't empty match items containing both
@@ -57,7 +57,7 @@ class DesignsController extends Controller
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
-                ->paginate(8);
+                ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
                 //dd(DB::getQueryLog()); // Show results of log
         }
@@ -91,16 +91,22 @@ class DesignsController extends Controller
             'imageLink' => 'required',
             'designType' => 'required'
         ]);
-        
+
         $upload = new Upload;
         $upload->title = $request->input('title');
         $upload->description = $request->input('description');
         $upload->username = $request->input('username');
-        $upload->imagelink = $request->input('imageLink');          
         $upload->designtype = $request->input('designType');
-        $upload->save();
+        $upload->imagelink = $request->input('imageLink');
+        // Ensure link is from imgur
+        if (strpos($request->input('imageLink'), 'imgur.com/') == false) {
+            return view('/upload')->with('errorMessage', 'Did not add to upload queue. Image must be from Imgur.');
+        }
+        else {
+            $upload->save();
+            return view('/upload')->with('successMessage', 'Design has been added to upload queue!');
+        }
         
-        return view('/upload')->with('successMessage', 'Design has been added to upload queue!');
     }
 
     /**

@@ -15,7 +15,7 @@
     @if(count($designs) > 0)
     <div class="card-deck">
         @foreach($designs as $design)
-            <div class="card mb-4 cardHover" style="min-width: 22rem;">
+            <div class="card mb-4 cardHover" style="min-width: 20rem;">
                 <a href="http://161.35.38.150/designs/{{$design->id}}" class="cardLink">
                     <img class="card-img-top" src="https://i.redd.it/yx5s9sib1bp41.jpg" alt="Card image cap">
                     <div class="card-body">
