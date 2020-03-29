@@ -12,7 +12,7 @@
         @foreach($designs as $design)
             <div class="card mb-4" style="min-width: 20rem;">
                 <a href="/designs/{{$design->id}}" class="cardLink cardHover">
-                    <img class="card-img-top" src="https://i.redd.it/yx5s9sib1bp41.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="{{$design->image_url}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{$design->title}}</h5>
                         <p class="card-text">{{$design->description}}</p>
