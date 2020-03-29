@@ -1,7 +1,7 @@
 <div class="filter-form form">
-    <form id="uploadInput" class="formStyle" action="http://161.35.38.150/search" method="post">
+    <form id="uploadInput" class="formStyle" action="/search" method="post">
     @csrf
-        <div class="row"> 
+        <div class="row">
             <div class="col-xs-12 col-md-6 py-3">
                     <label for="filterInput">Search for a design</label>
                     <input type="text" class="form-control" id="filterInput" name="filterInput" placeholder="">
