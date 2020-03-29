@@ -6,7 +6,7 @@
 <body>
 @include('layout.designFilter')
 <div class="container">
-<?php echo "<pre>"; print_r($designs); ?>
+<?php //echo "<pre>"; print_r($designs); ?>
     @if(count($designs) > 0)
     <div class="card-deck">
         @foreach($designs as $design)

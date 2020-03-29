@@ -27,8 +27,8 @@ class DesignsController extends Controller
     public function searchDesigns(Request $request)
     {
         $designs;
-        var_dump($request->filterSelect);
-        var_dump($request->filterInput);
+        //var_dump($request->filterSelect);
+        //var_dump($request->filterInput);
         // If both fields are empty but a search is made -> return all as usual
         if($request->filterInput === NULL && $request->filterSelect === "All") {
             $designs = DB::table('designs')->paginate(8);
@@ -51,12 +51,15 @@ class DesignsController extends Controller
         }
         // If select and search field aren't empty match items containing both
         else {
+            //DB::enableQueryLog(); // Enable query log
             $designs = DB::table('designs')
-                ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->where('title', 'LIKE', '%'.$request->filterInput.'%')
+                ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
+                ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->paginate(8);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
+                //dd(DB::getQueryLog()); // Show results of log
         }
 
         return view('designCatalogue')->with('designs',$designs);
