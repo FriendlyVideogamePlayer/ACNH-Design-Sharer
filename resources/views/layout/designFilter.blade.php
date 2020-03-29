@@ -1,15 +1,15 @@
 <div class="filter-form form">
-    <form id="uploadInput" class="formStyle" action="http://localhost/ACNH-DesignSharer/public/designs/search" method="post">
+    <form id="uploadInput" class="formStyle" action="http://localhost/ACNH-DesignSharer/public/search" method="post">
     @csrf
         <div class="row"> 
-            <div class="col py-3">
+            <div class="col-xs-12 col-md-6 py-3">
                     <label for="filterInput">Search for a design</label>
                     <input type="text" class="form-control" id="filterInput" name="filterInput" placeholder="">
             </div>
-            <div class="col py-3">
+            <div class="col-xs-12 col-md-6 py-3">
                     <label for="typeSelect">Item type</label>
                     <select name="filterSelect" class="form-control" id="typeSelect">
-                        <option>Choose a type</option>
+                        <option value="All">Choose a type</option>
                         <option value="Top">Top (Custom Design Pro editor needed)</option>
                         <option value="Dress">Dress (Custom Design Pro editor needed)</option>
                         <option value="Headwear">Headwear (Custom Design Pro editor needed)</option>

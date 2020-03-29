@@ -20,6 +20,12 @@
             </div>
     </div>
 
+    <div class="alert alert-danger" role="alert" style="text-align:center;">
+        No designs found. :( 
+    </div>
+
+
+
 
   
 </div>

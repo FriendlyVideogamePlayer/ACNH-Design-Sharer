@@ -23,14 +23,42 @@ class DesignsController extends Controller
         
     }
 
+    // Searches the DB for any design title containg search query
     public function searchDesigns(Request $request)
     {
-        // Searches the DB for any design title containg search query
-        $inputs = $request->input();
-        $designs = DB::table('designs')
-            ->where('title', 'LIKE', '%'.$request->filterInput.'%')
-            ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
-            ->paginate(8);
+        $designs;
+        var_dump($request->filterSelect);
+        var_dump($request->filterInput);
+        // If both fields are empty but a search is made -> return all as usual
+        if($request->filterInput === NULL && $request->filterSelect === "All") {
+            $designs = DB::table('designs')->paginate(8);
+            
+        }
+        // If search field is empty but a design type selected -> show designs with that type
+        elseif($request->filterInput === NULL) {
+            $designs = DB::table('designs')
+                ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+                ->paginate(8);
+                $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
+        }
+        // If select is empty but search field isn't -> show designs including search term
+        elseif($request->filterSelect === "All") {
+            $designs = DB::table('designs')
+                ->where('title', 'LIKE', '%'.$request->filterInput.'%')
+                ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
+                ->paginate(8);
+                $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
+        }
+        // If select and search field aren't empty match items containing both
+        else {
+            $designs = DB::table('designs')
+                ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+                ->where('title', 'LIKE', '%'.$request->filterInput.'%')
+                ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
+                ->paginate(8);
+                $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
+        }
+
         return view('designCatalogue')->with('designs',$designs);
     }
 
