@@ -87,16 +87,20 @@ class DesignsController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'imageLink' => 'required',
+            'designType' => 'required'
         ]);
+        
         $upload = new Upload;
         $upload->title = $request->input('title');
         $upload->description = $request->input('description');
-        $upload->username = $request->input('username');       
+        $upload->username = $request->input('username');
+        $upload->imagelink = $request->input('imageLink');          
         $upload->designtype = $request->input('designType');
         $upload->save();
         
-        return redirect('/designs')->with('success', 'Design added!');
+        return view('/upload')->with('successMessage', 'Design has been added to upload queue!');
     }
 
     /**

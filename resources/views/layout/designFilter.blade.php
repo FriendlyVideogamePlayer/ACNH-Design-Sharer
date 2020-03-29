@@ -1,5 +1,5 @@
 <div class="filter-form form">
-    <form id="uploadInput" class="formStyle" action="http://localhost/ACNH-DesignSharer/public/search" method="post">
+    <form id="uploadInput" class="formStyle" action="http://161.35.38.150/search" method="post">
     @csrf
         <div class="row"> 
             <div class="col-xs-12 col-md-6 py-3">

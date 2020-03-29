@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/designs');
 });
 
 Route::get('/upload', function () {
@@ -22,7 +22,5 @@ Route::get('/upload', function () {
 });
 
 Route::any('/search', 'DesignsController@searchDesigns');
-
-
 
 Route::resource('designs', 'DesignsController');
