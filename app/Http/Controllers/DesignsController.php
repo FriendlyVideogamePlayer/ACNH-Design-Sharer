@@ -62,7 +62,7 @@ class DesignsController extends Controller
                 //dd(DB::getQueryLog()); // Show results of log
         }
 
-        return view('designCatalogue')->with('designs',$designs);
+        return view('designCatalogue')->with(['designs' => $designs, 'searchMessage' => 'Displaying results for "'.$request->filterInput.'" in "'.$request->filterSelect.'"']);
     }
 
     /**
@@ -90,9 +90,9 @@ class DesignsController extends Controller
             'description' => 'required'
         ]);
         $upload = new Upload;
-        $upload->username = $request->input('username');
         $upload->title = $request->input('title');
         $upload->description = $request->input('description');
+        $upload->username = $request->input('username');       
         $upload->designtype = $request->input('designType');
         $upload->save();
         

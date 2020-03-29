@@ -6,7 +6,7 @@
 <body>
 
 <div class="container">
-
+@if($design != NULL)
     <div class="card-deck">
             <div class="card mb-4" style="min-width: 22rem;">
                     <img class="card-img-top" src="https://i.redd.it/yx5s9sib1bp41.jpg" alt="Card image cap">
@@ -19,13 +19,14 @@
                     </div>
             </div>
     </div>
-
-    <div class="alert alert-danger" role="alert" style="text-align:center;">
-        No designs found. :( 
+@else
+    @include('layout.designFilter')
+    <div class="alert alert-danger my-5" role="alert" style="text-align:center;">
+        No designs found. :( Maybe try searching again?
     </div>
 
 
-
+@endif
 
   
 </div>

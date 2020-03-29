@@ -7,6 +7,11 @@
 @include('layout.designFilter')
 <div class="container">
 <?php //echo "<pre>"; print_r($designs); ?>
+    @isset($searchMessage)
+        <div class="alert alert-info" role="alert" style="text-align:center;">
+            {{$searchMessage}}
+        </div>
+    @endif
     @if(count($designs) > 0)
     <div class="card-deck">
         @foreach($designs as $design)
