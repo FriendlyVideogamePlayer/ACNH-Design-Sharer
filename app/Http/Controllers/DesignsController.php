@@ -99,8 +99,8 @@ class DesignsController extends Controller
         $upload->designtype = $request->input('designType');
         $upload->imagelink = $request->input('imageLink');
         // Ensure link is from imgur
-        if (strpos($request->input('imageLink'), 'imgur.com/') == false) {
-            return view('/upload')->with('errorMessage', 'Did not add to upload queue. Image must be from Imgur.');
+        if (strpos($request->input('imageLink'), 'https://i.imgur.com/') == false) {
+            return view('/upload')->with('errorMessage', 'Did not add to upload queue. Image must be from Imgur and must use the i.imgur link.');
         }
         else {
             $upload->save();
@@ -132,4 +132,12 @@ class DesignsController extends Controller
     {
         //
     }
+
+    // Searches the DB for any design title containg search query
+    public function approveDesigns()
+    {
+        $designs = DB::table('uploads')->paginate(9);
+        return view('approve')->with('designs',$designs);
+    }
+
 }

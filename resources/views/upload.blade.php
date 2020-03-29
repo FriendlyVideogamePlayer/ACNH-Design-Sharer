@@ -18,9 +18,12 @@
         @endisset
 
         @include('layout.warnings')
+        <div class="alert alert-warning" role="alert" style="text-align:center;">
+            <p>Images MUST be uploaded to imgur and you must copy the i.imgur link. <a href="/uploadhelp">Need help uploading an image?</a> </p>
+        </div>
         {!! Form::open(['action' => 'DesignsController@store', 'method' => 'POST']) !!}
                 <div class="row"> 
-                    <div class="col-xs-12 col-md-12 pt-3">
+                    <div class="col-xs-12 col-md-12 pt-1">
                         {{Form::label('username', 'Name')}}
                         {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => 'The name you want displayed on your submission'])}}
                     </div>
@@ -35,7 +38,7 @@
                         {{Form::text('description', '', ['class' => 'form-control', 'placeholder' => 'The description you want displayed under your submission'])}}
                     </div>
                     <div class="col-xs-12 col-md-12  pt-3">
-                        {{Form::label('imageLink', 'Image link')}}
+                        {{Form::label('imageLink', 'Image link (MUST be an Imgur link)')}}
                         {{Form::text('imageLink', '', ['class' => 'form-control', 'placeholder' => 'A link to the image of your design'])}}
                     </div>
                 </div>

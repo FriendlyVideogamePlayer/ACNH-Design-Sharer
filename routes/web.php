@@ -21,6 +21,12 @@ Route::get('/upload', function () {
     return view('upload');
 });
 
+Route::get('/uploadhelp', function () {
+    return view('uploadhelp');
+});
+
 Route::any('/search', 'DesignsController@searchDesigns');
 
 Route::resource('designs', 'DesignsController');
+
+Route::any('/approvedesigns', 'DesignsController@approveDesigns');
