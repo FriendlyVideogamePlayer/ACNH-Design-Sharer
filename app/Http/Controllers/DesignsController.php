@@ -140,6 +140,7 @@ class DesignsController extends Controller
         return view('approve')->with('designs',$designs);
     }
 
+    // If a design has been approved -> upload it to designs table and remove it from uploads table
     public function uploadDesigns(Request $request)
     {
         $design = new Design;
@@ -150,6 +151,14 @@ class DesignsController extends Controller
         $design->imagelink = $request->input('imageLink');
         $design->save();
 
+        DB::table('uploads')->where('id', $request->input('id'))->delete();
+
+        return redirect('/approvedesigns')->with('successMessage', 'Design '.$request->input('id').' with a title of '.$request->input('title').' has been approved!');
+    }
+
+    // If a design has been disapproved -> remove it from uploads table
+    public function removeDesigns(Request $request)
+    {
         DB::table('uploads')->where('id', $request->input('id'))->delete();
 
         return redirect('/approvedesigns')->with('successMessage', 'Design '.$request->input('id').' with a title of '.$request->input('title').' has been approved!');

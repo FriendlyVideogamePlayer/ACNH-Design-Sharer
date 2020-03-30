@@ -31,4 +31,6 @@ Route::resource('designs', 'DesignsController');
 
 Route::get('/approvedesigns', 'DesignsController@approveDesigns');
 
-Route::post('/approvedesigns', 'DesignsController@uploadDesigns')->name('approve.designs');
+Route::post('/approvedesigns', 'DesignsController@uploadDesigns')->name('upload.designs');
+
+Route::post('/disapprovedesigns', 'DesignsController@removeDesigns')->name('disapprove.designs');

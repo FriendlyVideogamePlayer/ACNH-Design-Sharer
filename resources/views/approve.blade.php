@@ -28,16 +28,27 @@
                     </div>
                 </a>
                 <div class="card-body">
-                    <form action="{{ route('approve.designs') }}" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="id" value="{{ $design->id }}">
-                        <input type="hidden" name="title" value="{{ $design->title }}">
-                        <input type="hidden" name="description" value="{{ $design->description }}">
-                        <input type="hidden" name="username" value="{{ $design->username }}">
-                        <input type="hidden" name="designType" value="{{ $design->designtype }}">
-                        <input type="hidden" name="imageLink" value="{{ $design->imagelink }}">
-                        <button type="submit" class="btn btn-primary">Approve!</button>
-                    </form>
+                    <div class="row">
+                        <div class="col">
+                            <form action="{{ route('upload.designs') }}" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $design->id }}">
+                                <input type="hidden" name="title" value="{{ $design->title }}">
+                                <input type="hidden" name="description" value="{{ $design->description }}">
+                                <input type="hidden" name="username" value="{{ $design->username }}">
+                                <input type="hidden" name="designType" value="{{ $design->designtype }}">
+                                <input type="hidden" name="imageLink" value="{{ $design->imagelink }}">
+                                <button type="submit" class="btn btn-primary">Approve!</button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="{{ route('disapprove.designs') }}" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $design->id }}">
+                                <button type="submit" class="btn btn-danger">Disapprove!</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endforeach
