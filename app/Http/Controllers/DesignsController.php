@@ -85,10 +85,10 @@ class DesignsController extends Controller
     {
         //Adds a new design to the DB
         $this->validate($request, [
-            'username' => 'required',
-            'title' => 'required',
-            'description' => 'required',
-            'imageLink' => 'required',
+            'username' => 'required|string|min:3|max:50',
+            'title' => 'required|string|min:3|max:50',
+            'description' => 'required|string|min:3|max:150',
+            'imageLink' => 'required|string|min:3|max:38',
             'designType' => 'required'
         ]);
 
@@ -99,12 +99,12 @@ class DesignsController extends Controller
         $upload->designtype = $request->input('designType');
         $upload->imagelink = $request->input('imageLink');
         // Ensure link is from imgur
-        if (strpos($request->input('imageLink'), 'https://i.imgur.com/') == false) {
-            return view('/upload')->with('errorMessage', 'Did not add to upload queue. Image must be from Imgur and must use the i.imgur link.');
-        }
-        else {
+        if (strpos($request->input('imageLink'), 'https://i.imgur.com/') !== false) {
             $upload->save();
             return view('/upload')->with('successMessage', 'Design has been added to upload queue!');
+        }
+        else {
+            return view('/upload')->with('errorMessage', 'Did not add to upload queue. Image must be from Imgur and must use the i.imgur link.');
         }
         
     }
@@ -133,11 +133,26 @@ class DesignsController extends Controller
         //
     }
 
-    // Searches the DB for any design title containg search query
+    // Shows the approve view
     public function approveDesigns()
     {
         $designs = DB::table('uploads')->paginate(9);
         return view('approve')->with('designs',$designs);
+    }
+
+    public function uploadDesigns(Request $request)
+    {
+        $design = new Design;
+        $design->title = $request->input('title');
+        $design->description = $request->input('description');
+        $design->username = $request->input('username');
+        $design->designtype = $request->input('designType');
+        $design->imagelink = $request->input('imageLink');
+        $design->save();
+
+        DB::table('uploads')->where('id', $request->input('id'))->delete();
+
+        return redirect('/approvedesigns')->with('successMessage', 'Design '.$request->input('id').' with a title of '.$request->input('title').' has been approved!');
     }
 
 }

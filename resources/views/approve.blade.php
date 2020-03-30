@@ -6,6 +6,11 @@
 <body>
 
 <div class="container">
+    @isset($successMessage)
+        <div class="alert alert-success" role="alert" style="text-align:center;">
+            {{$successMessage}}
+        </div>
+    @endisset
 
     @if(count($designs) > 0)
     <div class="card-deck">
@@ -23,7 +28,16 @@
                     </div>
                 </a>
                 <div class="card-body">
-                    <button type="submit" class="btn btn-primary">Approve!</button>
+                    <form action="{{ route('approve.designs') }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ $design->id }}">
+                        <input type="hidden" name="title" value="{{ $design->title }}">
+                        <input type="hidden" name="description" value="{{ $design->description }}">
+                        <input type="hidden" name="username" value="{{ $design->username }}">
+                        <input type="hidden" name="designType" value="{{ $design->designtype }}">
+                        <input type="hidden" name="imageLink" value="{{ $design->imagelink }}">
+                        <button type="submit" class="btn btn-primary">Approve!</button>
+                    </form>
                 </div>
             </div>
         @endforeach

@@ -16,9 +16,10 @@ class CreateDesignsTable extends Migration
         // Create a DB containg the correct fields
         Schema::create('designs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->mediumText('description');
-            $table->string('username');
+            $table->string('title',50);
+            $table->string('description',150);
+            $table->string('username',50);
+            $table->string('imageLink',38);
             $table->string('designtype');
             $table->dateTime('updated_at');
             $table->dateTime('created_at');
@@ -27,9 +28,10 @@ class CreateDesignsTable extends Migration
         // Create a DB containg the correct fields
         Schema::create('uploads', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->mediumText('description');
-            $table->string('username');
+            $table->string('title',50);
+            $table->string('description',150);
+            $table->string('username',50);
+            $table->string('imageLink',38);
             $table->string('designtype');
             $table->dateTime('updated_at');
             $table->dateTime('created_at');
