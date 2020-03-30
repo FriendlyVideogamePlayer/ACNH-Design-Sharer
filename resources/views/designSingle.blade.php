@@ -8,7 +8,7 @@
 <div class="container">
     @if($design != NULL)
         <div class="card-deck">
-                <div class="card mb-4" style="min-width: 22rem;">
+                <div class="card m-4" style="min-width: 22rem;">
                         <img class="card-img-top" src="{{$design->imagelink}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{$design->title}}</h5>
