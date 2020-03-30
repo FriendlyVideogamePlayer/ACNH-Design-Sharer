@@ -24,21 +24,21 @@
         {!! Form::open(['action' => 'DesignsController@store', 'method' => 'POST']) !!}
                 <div class="row"> 
                     <div class="col-xs-12 col-md-12 pt-1">
-                        {{Form::label('username', 'Name')}}
+                        {{Form::label('username', 'Name (max 50 characters)')}}
                         {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => 'The name you want displayed on your submission'])}}
                     </div>
                     <div class="col-xs-12 col-md-12  pt-3">
-                        {{Form::label('title', 'Title')}}
+                        {{Form::label('title', 'Title (max 50 characters)')}}
                         {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'The title you want displayed on your submission'])}}
                     </div>
                 </div>
                 <div class="row"> 
                     <div class="col-xs-12 col-md-12  pt-3">
-                        {{Form::label('description', 'Description')}}
+                        {{Form::label('description', 'Description (max 150 characters)')}}
                         {{Form::text('description', '', ['class' => 'form-control', 'placeholder' => 'The description you want displayed under your submission'])}}
                     </div>
                     <div class="col-xs-12 col-md-12  pt-3">
-                        {{Form::label('imageLink', 'Image link (MUST be an Imgur link)')}}
+                        {{Form::label('imageLink', 'Image link (This MUST be an i.imgur link)')}}
                         {{Form::text('imageLink', '', ['class' => 'form-control', 'placeholder' => 'A link to the image of your design'])}}
                     </div>
                 </div>

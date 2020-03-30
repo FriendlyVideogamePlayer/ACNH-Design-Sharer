@@ -85,10 +85,10 @@ class DesignsController extends Controller
     {
         //Adds a new design to the DB
         $this->validate($request, [
-            'username' => 'required',
-            'title' => 'required',
-            'description' => 'required',
-            'imageLink' => 'required',
+            'username' => 'required|string|min:3|max:50',
+            'title' => 'required|string|min:3|max:50',
+            'description' => 'required|string|min:3|max:150',
+            'imageLink' => 'required|string|min:3|max:38',
             'designType' => 'required'
         ]);
 
