@@ -16,9 +16,8 @@ class DesignsController extends Controller
     public function index()
     {
         //Takes all of the designs from the DB and displays them on the main catalogue
-        $designs = DB::table('designs')->where('approved', 1)->paginate(9);
+        $designs = DB::table('designs')->where('approved', 1)->orderByDesc('created_at')->paginate(9);
         return view('designCatalogue')->with('designs',$designs);
-
     }
 
     // Searches the DB for any design title containg search query
@@ -27,7 +26,7 @@ class DesignsController extends Controller
         $designs;
         // If both fields are empty but a search is made -> return all as usual
         if($request->filterInput === NULL && $request->filterSelect === "All") {
-            $designs = DB::table('designs')->where('approved', 1)->paginate(9);
+            $designs = DB::table('designs')->where('approved', 1)->orderByDesc('created_at')->paginate(9);
 
         }
         // If search field is empty but a design type selected -> show designs with that type
@@ -35,6 +34,7 @@ class DesignsController extends Controller
             $designs = DB::table('designs')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->where('approved', 1)
+                ->orderByDesc('created_at')
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
@@ -45,6 +45,7 @@ class DesignsController extends Controller
                 ->where('approved', 1)
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('approved', 1)
+                ->orderByDesc('created_at')
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
@@ -58,6 +59,7 @@ class DesignsController extends Controller
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->where('approved', 1)
+                ->orderByDesc('created_at')
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
                 //dd(DB::getQueryLog()); // Show results of log
