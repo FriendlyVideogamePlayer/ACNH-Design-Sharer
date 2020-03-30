@@ -72,7 +72,7 @@ class DesignsController extends Controller
         //Takes all of the designs from the DB that are yet to be approved and displays them in the catalogue
         $designs = DB::table('designs')->where('approved', 0)->paginate(9);
 
-        return view('designCatalogue')->with('designs',$designs);
+        return view('designCatalogue')->with(['designs' => $designs, 'onUnapprovedDesigns' => 'You are currently viewing unapproved designs. Some of these designs might not be appropiate.']);
     }
 
     /**
