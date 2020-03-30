@@ -16,8 +16,8 @@
     <div class="card-deck">
         @foreach($designs as $design)
             <div class="card mb-4 cardHover" style="min-width: 20rem;">
-                <a href="http://161.35.38.150/designs/{{$design->id}}" class="cardLink">
-                    <img class="card-img-top" src="https://i.redd.it/yx5s9sib1bp41.jpg" alt="Card image cap">
+                <a href="/designs/{{$design->id}}" class="cardLink">
+                    <img class="card-img-top" src="{{$design->imageLink}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{$design->title}}</h5>
                         <p class="card-text">{{$design->description}}</p>
@@ -36,7 +36,7 @@
             No designs found. :( Maybe try searching again?
         </div>
     @endif
-  
+
 </div>
 
 @include('layout.footer')
