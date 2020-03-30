@@ -6,13 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="http://161.35.38.150/designs">Home </a>
+        <a class="nav-link" href="/designs">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://161.35.38.150/upload">Upload a design </a>
+        <a class="nav-link" href="/upload">Upload a design </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://161.35.38.150/uploadhelp">How to upload?</a>
+        <a class="nav-link" href="/uploadhelp">How to upload?</a>
       </li>
     </ul>
   </div>
