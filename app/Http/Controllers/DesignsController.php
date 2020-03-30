@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Design;
-use App\Upload;
 use Illuminate\Support\Facades\DB;
 
 class DesignsController extends Controller
@@ -17,9 +16,8 @@ class DesignsController extends Controller
     public function index()
     {
         //Takes all of the designs from the DB and displays them on the main catalogue
-        $designs = DB::table('designs')->where('approved', 1)->paginate(9);
+        $designs = DB::table('designs')->where('approved', 1)->orderByDesc('created_at')->paginate(9);
         return view('designCatalogue')->with('designs',$designs);
-        
     }
 
     // Searches the DB for any design title containg search query
@@ -28,14 +26,15 @@ class DesignsController extends Controller
         $designs;
         // If both fields are empty but a search is made -> return all as usual
         if($request->filterInput === NULL && $request->filterSelect === "All") {
-            $designs = DB::table('designs')->where('approved', 1)->paginate(9);
-            
+            $designs = DB::table('designs')->where('approved', 1)->orderByDesc('created_at')->paginate(9);
+
         }
         // If search field is empty but a design type selected -> show designs with that type
         elseif($request->filterInput === NULL) {
             $designs = DB::table('designs')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->where('approved', 1)
+                ->orderByDesc('created_at')
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
@@ -46,6 +45,7 @@ class DesignsController extends Controller
                 ->where('approved', 1)
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('approved', 1)
+                ->orderByDesc('created_at')
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
@@ -59,6 +59,7 @@ class DesignsController extends Controller
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->where('approved', 1)
+                ->orderByDesc('created_at')
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
                 //dd(DB::getQueryLog()); // Show results of log
@@ -98,7 +99,7 @@ class DesignsController extends Controller
             'username' => 'required|string|min:3|max:50',
             'title' => 'required|string|min:3|max:50',
             'description' => 'required|string|min:3|max:150',
-            'imageLink' => 'required|string|min:3|max:38',
+            'imageLink' => 'required|string|min:21|max:38',
             'designType' => 'required'
         ]);
 
@@ -109,15 +110,19 @@ class DesignsController extends Controller
         $design->designtype = $request->input('designType');
         $design->approved = 0;
         $design->imagelink = $request->input('imageLink');
-        // Ensure link is from imgur
-        if (strpos($request->input('imageLink'), 'https://i.imgur.com/') !== false) {
-            $design->save();
-            return view('/upload')->with('successMessage', 'Design has been added to upload queue!');
+
+        // ensure image link is from Imgur
+        if(strpos($request->input('imageLink'), 'https://i.imgur.com/') === false) {
+            return view('/upload')->with('errorMessage', 'Did not add to design queue. Image must be from Imgur and must use the i.imgur link.');
         }
-        else {
-            return view('/upload')->with('errorMessage', 'Did not add to upload queue. Image must be from Imgur and must use the i.imgur link.');
+
+        // ensure image link returns 200 status
+        if(!@imagecreatefromjpeg($design->imagelink)) {
+            return view('/upload')->with('errorMessage', 'Did not add to design queue. Imgur link returned 404 (Not Found).');
         }
-        
+
+        $design->save();
+        return view('/upload')->with('successMessage', 'Design has been added to design queue!');
     }
 
     /**
