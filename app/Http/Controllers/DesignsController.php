@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Design;
-use App\Upload;
 use Illuminate\Support\Facades\DB;
 
 class DesignsController extends Controller
@@ -20,7 +19,7 @@ class DesignsController extends Controller
         //$designs = Design::all();
         $designs = DB::table('designs')->where('approved', 1)->paginate(9);
         return view('designCatalogue')->with('designs',$designs);
-        
+
     }
 
     // Searches the DB for any design title containg search query
@@ -32,7 +31,7 @@ class DesignsController extends Controller
         // If both fields are empty but a search is made -> return all as usual
         if($request->filterInput === NULL && $request->filterSelect === "All") {
             $designs = DB::table('designs')->where('approved', 1)->paginate(9);
-            
+
         }
         // If search field is empty but a design type selected -> show designs with that type
         elseif($request->filterInput === NULL) {
@@ -93,7 +92,7 @@ class DesignsController extends Controller
             'username' => 'required|string|min:3|max:50',
             'title' => 'required|string|min:3|max:50',
             'description' => 'required|string|min:3|max:150',
-            'imageLink' => 'required|string|min:3|max:38',
+            'imageLink' => 'required|string|min:21|max:38',
             'designType' => 'required'
         ]);
 
@@ -104,15 +103,19 @@ class DesignsController extends Controller
         $design->designtype = $request->input('designType');
         $design->approved = 0;
         $design->imagelink = $request->input('imageLink');
-        // Ensure link is from imgur
-        if (strpos($request->input('imageLink'), 'https://i.imgur.com/') !== false) {
-            $design->save();
-            return view('/upload')->with('successMessage', 'Design has been added to upload queue!');
+
+        // ensure image link is from Imgur
+        if(strpos($request->input('imageLink'), 'https://i.imgur.com/') === false) {
+            return view('/upload')->with('errorMessage', 'Did not add to design queue. Image must be from Imgur and must use the i.imgur link.');
         }
-        else {
-            return view('/upload')->with('errorMessage', 'Did not add to upload queue. Image must be from Imgur and must use the i.imgur link.');
+
+        // ensure image link returns 200 status
+        if(!@imagecreatefromjpeg($design->imagelink)) {
+            return view('/upload')->with('errorMessage', 'Did not add to design queue. Imgur link returned 404 (Not Found).');
         }
-        
+
+        $design->save();
+        return view('/upload')->with('successMessage', 'Design has been added to design queue!');
     }
 
     /**
