@@ -7,12 +7,12 @@
 <div class="form">
     <div class="container">
         @isset($errorMessage)
-            <div class="alert alert-danger" role="alert" style="text-align:center;">
+            <div class="alert alert-danger mt-4" role="alert" style="text-align:center;">
                 {{$errorMessage}}
             </div>
         @endisset
         @isset($successMessage)
-            <div class="alert alert-success" role="alert" style="text-align:center;">
+            <div class="alert alert-success mt-4" role="alert" style="text-align:center;">
                 {{$successMessage}}
             </div>
         @endisset
