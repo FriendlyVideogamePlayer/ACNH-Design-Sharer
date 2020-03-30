@@ -19,7 +19,7 @@ class CreateDesignsTable extends Migration
             $table->string('title',50);
             $table->string('description',150);
             $table->string('username',50);
-            $table->string('imageLink',38);
+            $table->string('imageLink',38)->unique();
             $table->string('designtype');
             $table->boolean('approved');
             $table->dateTime('updated_at');
