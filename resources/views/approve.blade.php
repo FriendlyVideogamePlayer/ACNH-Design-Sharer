@@ -37,6 +37,7 @@
                                 <input type="hidden" name="description" value="{{ $design->description }}">
                                 <input type="hidden" name="username" value="{{ $design->username }}">
                                 <input type="hidden" name="designType" value="{{ $design->designtype }}">
+                                <input type="hidden" name="approved" value="1">
                                 <input type="hidden" name="imageLink" value="{{ $design->imagelink }}">
                                 <button type="submit" class="btn btn-primary">Approve!</button>
                             </form>

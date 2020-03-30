@@ -21,6 +21,7 @@ class CreateDesignsTable extends Migration
             $table->string('username',50);
             $table->string('imageLink',38);
             $table->string('designtype');
+            
             $table->dateTime('updated_at');
             $table->dateTime('created_at');
         });

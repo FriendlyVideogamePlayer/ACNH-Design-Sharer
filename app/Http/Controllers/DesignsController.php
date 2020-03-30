@@ -18,7 +18,7 @@ class DesignsController extends Controller
     {
         //Takes all of the designs from the DB and displays them on the main catalogue
         //$designs = Design::all();
-        $designs = DB::table('designs')->paginate(9);
+        $designs = DB::table('designs')->where('approved', 1)->paginate(9);
         return view('designCatalogue')->with('designs',$designs);
         
     }
@@ -31,13 +31,14 @@ class DesignsController extends Controller
         //var_dump($request->filterInput);
         // If both fields are empty but a search is made -> return all as usual
         if($request->filterInput === NULL && $request->filterSelect === "All") {
-            $designs = DB::table('designs')->paginate(9);
+            $designs = DB::table('designs')->where('approved', 1)->paginate(9);
             
         }
         // If search field is empty but a design type selected -> show designs with that type
         elseif($request->filterInput === NULL) {
             $designs = DB::table('designs')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+                ->where('approved', 1)
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
@@ -45,7 +46,9 @@ class DesignsController extends Controller
         elseif($request->filterSelect === "All") {
             $designs = DB::table('designs')
                 ->where('title', 'LIKE', '%'.$request->filterInput.'%')
+                ->where('approved', 1)
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
+                ->where('approved', 1)
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
         }
@@ -55,8 +58,10 @@ class DesignsController extends Controller
             $designs = DB::table('designs')
                 ->where('title', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+                ->where('approved', 1)
                 ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+                ->where('approved', 1)
                 ->paginate(9);
                 $designs->appends(['filterInput' => $request->filterInput, 'filterSelect' => $request->filterSelect]);
                 //dd(DB::getQueryLog()); // Show results of log
@@ -92,15 +97,16 @@ class DesignsController extends Controller
             'designType' => 'required'
         ]);
 
-        $upload = new Upload;
-        $upload->title = $request->input('title');
-        $upload->description = $request->input('description');
-        $upload->username = $request->input('username');
-        $upload->designtype = $request->input('designType');
-        $upload->imagelink = $request->input('imageLink');
+        $design = new Design;
+        $design->title = $request->input('title');
+        $design->description = $request->input('description');
+        $design->username = $request->input('username');
+        $design->designtype = $request->input('designType');
+        $design->approved = 0;
+        $design->imagelink = $request->input('imageLink');
         // Ensure link is from imgur
         if (strpos($request->input('imageLink'), 'https://i.imgur.com/') !== false) {
-            $upload->save();
+            $design->save();
             return view('/upload')->with('successMessage', 'Design has been added to upload queue!');
         }
         else {
@@ -136,32 +142,26 @@ class DesignsController extends Controller
     // Shows the approve view
     public function approveDesigns()
     {
-        $designs = DB::table('uploads')->paginate(9);
+        $designs = DB::table('designs')->where('approved', 0)->paginate(9);
         return view('approve')->with('designs',$designs);
     }
 
-    // If a design has been approved -> upload it to designs table and remove it from uploads table
+    // If a design has been approved -> set approved to true
     public function uploadDesigns(Request $request)
     {
-        $design = new Design;
-        $design->title = $request->input('title');
-        $design->description = $request->input('description');
-        $design->username = $request->input('username');
-        $design->designtype = $request->input('designType');
-        $design->imagelink = $request->input('imageLink');
-        $design->save();
-
-        DB::table('uploads')->where('id', $request->input('id'))->delete();
+        DB::table('designs')
+            ->where('id', $request->input('id'))
+            ->update(['approved' => 1]);
 
         return redirect('/approvedesigns')->with('successMessage', 'Design '.$request->input('id').' with a title of '.$request->input('title').' has been approved!');
     }
 
-    // If a design has been disapproved -> remove it from uploads table
+    // If a design has been disapproved -> remove it from designs table
     public function removeDesigns(Request $request)
     {
-        DB::table('uploads')->where('id', $request->input('id'))->delete();
+        DB::table('designs')->where('id', $request->input('id'))->delete();
 
-        return redirect('/approvedesigns')->with('successMessage', 'Design '.$request->input('id').' with a title of '.$request->input('title').' has been approved!');
+        return redirect('/approvedesigns')->with('removeMessage', 'Design '.$request->input('id').' with a title of '.$request->input('title').' has been disapproved!');
     }
 
 }
