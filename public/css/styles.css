@@ -36,3 +36,8 @@ form{
   .uploadForm {
     width: 80% !important;
   }
+
+  .unapprovedDesigns {
+    margin: 0 auto;
+    text-align: center !important;
+  }

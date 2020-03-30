@@ -22,5 +22,23 @@
                 <button type="submit" class="btn btn-primary">Search!</button>
             </div>
         </div>
+        
     </form>
 </div>
+
+<div class="row">
+            <div class="col-xs-12 col-md-12 py-3 unapprovedDesigns">
+                <button type="button" class="btn btn-warning" onclick="showUnapprovedDesignsCatalogue()">Show unapproved designs</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div id="unapprovedDesignsFilter" style="display:none;">
+                    <div class="alert alert-warning" role="alert" style="text-align:center;">
+                        Warning! By viewing unapproved designs you may end up viewing designs that are inappropiate or NSFW. 
+                        <br>
+                        <button type="button" class="btn btn-danger my-3">Yes, show me unapproved designs!</button>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -29,6 +29,8 @@ Route::any('/search', 'DesignsController@searchDesigns');
 
 Route::resource('designs', 'DesignsController');
 
+Route::get('/unapproveddesigns', 'DesignsController@showUnapprovedDesigns');
+
 Route::get('/approvedesigns', 'DesignsController@approveDesigns');
 
 Route::post('/approvedesigns', 'DesignsController@uploadDesigns')->name('upload.designs');

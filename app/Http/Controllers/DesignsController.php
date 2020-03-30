@@ -17,7 +17,6 @@ class DesignsController extends Controller
     public function index()
     {
         //Takes all of the designs from the DB and displays them on the main catalogue
-        //$designs = Design::all();
         $designs = DB::table('designs')->where('approved', 1)->paginate(9);
         return view('designCatalogue')->with('designs',$designs);
         
@@ -27,8 +26,6 @@ class DesignsController extends Controller
     public function searchDesigns(Request $request)
     {
         $designs;
-        //var_dump($request->filterSelect);
-        //var_dump($request->filterInput);
         // If both fields are empty but a search is made -> return all as usual
         if($request->filterInput === NULL && $request->filterSelect === "All") {
             $designs = DB::table('designs')->where('approved', 1)->paginate(9);
@@ -68,6 +65,14 @@ class DesignsController extends Controller
         }
 
         return view('designCatalogue')->with(['designs' => $designs, 'searchMessage' => 'Displaying results for "'.$request->filterInput.'" in "'.$request->filterSelect.'"']);
+    }
+
+    public function showUnapprovedDesigns()
+    {
+        //Takes all of the designs from the DB that are yet to be approved and displays them in the catalogue
+        $designs = DB::table('designs')->where('approved', 0)->paginate(9);
+
+        return view('designCatalogue')->with('designs',$designs);
     }
 
     /**
