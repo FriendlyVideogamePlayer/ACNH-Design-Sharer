@@ -21,22 +21,11 @@ class CreateDesignsTable extends Migration
             $table->string('username',50);
             $table->string('imageLink',38);
             $table->string('designtype');
-            
+            $table->boolean('approved');
             $table->dateTime('updated_at');
             $table->dateTime('created_at');
         });
 
-        // Create a DB containg the correct fields
-        Schema::create('uploads', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title',50);
-            $table->string('description',150);
-            $table->string('username',50);
-            $table->string('imageLink',38);
-            $table->string('designtype');
-            $table->dateTime('updated_at');
-            $table->dateTime('created_at');
-        });
     }
 
     /**
