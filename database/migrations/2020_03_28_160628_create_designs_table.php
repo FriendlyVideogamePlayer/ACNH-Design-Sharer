@@ -17,10 +17,12 @@ class CreateDesignsTable extends Migration
         Schema::create('designs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',50);
-            $table->string('description',150);
             $table->string('username',50);
             $table->string('imageLink',38)->unique();
             $table->string('designtype');
+            $table->string('tag1', 20)->nullable();
+            $table->string('tag2', 20)->nullable();
+            $table->string('tag3', 20)->nullable();
             $table->boolean('approved');
             $table->dateTime('updated_at');
             $table->dateTime('created_at');
