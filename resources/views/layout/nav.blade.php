@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/designs">Home </a>
+        <a class="nav-link" href="/designs">View Designs</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/upload">Upload a design </a>

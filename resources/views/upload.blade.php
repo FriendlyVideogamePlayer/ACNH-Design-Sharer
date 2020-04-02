@@ -45,7 +45,11 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-12  pt-3">
                     {{Form::label('designType', 'Type of Design')}}
-                    {!! Form::select('designType',['Top' => 'Top (Custom Design Pro editor needed)','Dress'=>'Dress (Custom Design Pro editor needed)','Headwear'=>'Headwear (Custom Design Pro editor needed)','Standard Design'=>'Standard Design','Room Design'=>'Room Design'],'Top',['class'=>'form-control','placeholder'=>'Select type']) !!}
+                    {!! Form::select('designType',['Brimmed Hat' => 'Brimmed Hat','Brimmed Cap'=>'Brimmed Cap',
+                    'Knit Cap'=>'Knit Cap','Top'=>'Top','Long Sleeve Dress Shirt'=>'Long Sleeve Dress Shirt','Short Sleeve T-shirt'=>'Short Sleeve T-shirt',
+                    'Coat'=>'Coat','Hoodie'=>'Hoodie','Sweater'=>'Sweater','Robe'=>'Robe','Round Dress'=>'Round Dress','Balloon Hem Dress'=>'Balloon Hem Dress',
+                    'Long Sleeve Dress'=>'Long Sleeve Dress','Short Sleeve Dress'=>'Short Sleeve Dress','Sleeveless Dress'=>'Sleeveless Dress',
+                    'Standard Design'=>'Standard Design','Nook Phone Case'=>'Nook Phone Case'],'',['class'=>'form-control','placeholder'=>'Select type']) !!}
                     </div>
                 </div>
                 <div class="row">
