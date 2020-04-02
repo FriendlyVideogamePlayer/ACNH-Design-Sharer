@@ -98,11 +98,13 @@ class DesignsController extends Controller
         $this->validate($request, [
             'username' => 'required|string|min:3|max:50',
             'title' => 'required|string|min:3|max:50',
-            'description' => 'required|string|min:3|max:150',
+            'tag1' => 'string|min:2|max:20',
+            'tag2' => 'string|min:2|max:20',
+            'tag3' => 'string|min:2|max:20',
             'imageLink' => 'required|string|min:21|max:38',
             'designType' => 'required'
         ]);
-
+        
         $design = new Design;
         $design->title = $request->input('title');
         $design->description = $request->input('description');
@@ -110,6 +112,10 @@ class DesignsController extends Controller
         $design->designtype = $request->input('designType');
         $design->approved = 0;
         $design->imagelink = $request->input('imageLink');
+
+        //IF tags are not empty -> include them
+        $tags = $request->input('tag1'). ", ".$request->input('tag2').", ".$request->input('tag3');
+        return $tags;
 
         // ensure image link is from Imgur
         if(strpos($request->input('imageLink'), 'https://i.imgur.com/') === false) {
@@ -152,7 +158,7 @@ class DesignsController extends Controller
     // Shows the approve view
     public function approveDesigns()
     {
-        $designs = DB::table('designs')->where('approved', 0)->paginate(9);
+        $designs = DB::table('designs')->where('approved', 0)->orderByDesc('id')->paginate(9);
         return view('approve')->with('designs',$designs);
     }
 

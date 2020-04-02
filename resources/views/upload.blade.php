@@ -34,8 +34,18 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12  pt-3">
-                        {{Form::label('description', 'Description (max 150 characters)')}}
-                        {{Form::text('description', '', ['class' => 'form-control', 'placeholder' => 'The description you want displayed under your submission'])}}
+                        {{Form::label('tag1', 'OPTIONAL: Tags (max 20 characters per tag)')}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4  pt-3">
+                        {{Form::text('tag1', '', ['class' => 'form-control', 'placeholder' => 'Tag 1 e.g Cute'])}}
+                    </div>
+                    <div class="col-xs-4 col-md-4  pt-3">
+                        {{Form::text('tag2', '', ['class' => 'form-control', 'placeholder' => 'Tag 2 e.g Purple'])}}
+                    </div>
+                    <div class="col-xs-4 col-md-4  pt-3">
+                        {{Form::text('tag3', '', ['class' => 'form-control', 'placeholder' => 'Tag 3 e.g Animal Crossing'])}}
                     </div>
                     <div class="col-xs-12 col-md-12  pt-3">
                         {{Form::label('imageLink', 'Image link (This MUST be an i.imgur link)')}}
@@ -54,7 +64,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12  pt-3">
-                        {{Form::submit('submit', ['class' => 'btn btn-primary'])}}
+                        {{Form::submit('Submit Design!', ['class' => 'btn btn-primary'])}}
                     </div>
                 </div>
         {!! Form::close() !!}
