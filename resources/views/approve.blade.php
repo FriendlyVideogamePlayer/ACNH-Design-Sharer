@@ -20,11 +20,11 @@
                     <img class="card-img-top" src="{{$design->imagelink}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{$design->title}}</h5>
-                        <p class="card-text">{{$design->description}}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Uploaded by {{$design->username}}</small> <br>
-                        <small class="text-muted">Design type: {{$design->designtype}}</small>
+                        <small class="text-muted">Design type: {{$design->designtype}}</small> <br>
+                        <small class="text-muted">Tags: {{$design->tag1 ?? ""}} {{$design->tag2 ?? ""}} {{$design->tag3 ?? ""}}</small>
                     </div>
                 </a>
                 <div class="card-body">
@@ -33,12 +33,6 @@
                             <form action="{{ route('upload.designs') }}" method="post">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="id" value="{{ $design->id }}">
-                                <input type="hidden" name="title" value="{{ $design->title }}">
-                                <input type="hidden" name="description" value="{{ $design->description }}">
-                                <input type="hidden" name="username" value="{{ $design->username }}">
-                                <input type="hidden" name="designType" value="{{ $design->designtype }}">
-                                <input type="hidden" name="approved" value="1">
-                                <input type="hidden" name="imageLink" value="{{ $design->imagelink }}">
                                 <button type="submit" class="btn btn-primary">Approve!</button>
                             </form>
                         </div>

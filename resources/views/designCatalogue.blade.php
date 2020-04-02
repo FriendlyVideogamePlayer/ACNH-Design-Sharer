@@ -4,8 +4,10 @@
 </html>
 
 <body>
-@include('layout.designFilter')
+
 <div class="container">
+    @include('layout.designFilter')
+
     @isset($searchMessage)
         <div class="alert alert-info" role="alert" style="text-align:center;">
             {{$searchMessage}}

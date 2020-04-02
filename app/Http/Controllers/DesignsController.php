@@ -43,7 +43,11 @@ class DesignsController extends Controller
             $designs = DB::table('designs')
                 ->where('title', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('approved', 1)
-                ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
+                ->orWhere('tag1', $request->filterInput)
+                ->where('approved', 1)
+                ->orWhere('tag2', $request->filterInput)
+                ->where('approved', 1)
+                ->orWhere('tag3', $request->filterInput)
                 ->where('approved', 1)
                 ->orderByDesc('id')
                 ->paginate(9);
@@ -56,7 +60,13 @@ class DesignsController extends Controller
                 ->where('title', 'LIKE', '%'.$request->filterInput.'%')
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->where('approved', 1)
-                ->orWhere('description', 'LIKE', '%'.$request->filterInput.'%')
+                ->orWhere('tag1', $request->filterInput)
+                ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+                ->where('approved', 1)
+                ->orWhere('tag2', $request->filterInput)
+                ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
+                ->where('approved', 1)
+                ->orWhere('tag3', $request->filterInput)
                 ->where('designtype', 'LIKE', '%'.$request->filterSelect.'%')
                 ->where('approved', 1)
                 ->orderByDesc('id')
@@ -114,15 +124,15 @@ class DesignsController extends Controller
 
         //If tags are not empty -> include them
         if($request->input('tag1') !== "") {
-            $design->tag1 = $request->input('tag1');
+            $design->tag1 = strtolower($request->input('tag1'));
         } 
 
         if($request->input('tag2') !== "") {
-            $design->tag2 = $request->input('tag2');
+            $design->tag2 = strtolower($request->input('tag2'));
         } 
 
         if($request->input('tag3') !== "") {
-            $design->tag3 = $request->input('tag3');
+            $design->tag3 = strtolower($request->input('tag3'));
         } 
 
         // ensure image link is from Imgur

@@ -1,12 +1,12 @@
 <div class="filter-form form">
     <form id="uploadInput" class="formStyle" action="/search" method="post">
     @csrf
-        <div class="row">
-            <div class="col-xs-12 col-md-5 py-3">
+        <div class="row pt-3">
+            <div class="col-xs-12 col-md-5 ">
                     <label for="filterInput">Search for a design</label>
-                    <input type="text" class="form-control" id="filterInput" name="filterInput" placeholder="">
+                    <input type="text" class="form-control" id="filterInput" name="filterInput" placeholder="e.g Purple Dress">
             </div>
-            <div class="col-xs-12 col-md-5 py-3">
+            <div class="col-xs-12 col-md-5 ">
                     <label for="typeSelect">Design type</label>
                     <select name="filterSelect" class="form-control" id="typeSelect">
                         <option value="All">Choose a type</option>
@@ -30,7 +30,7 @@
                     </select>
             </div>
 
-            <div class="col-xs-12 col-md-2 pb-2 pt-4 mt-4">
+            <div class="col-xs-12 col-md-2 pb-2 pt-2 mt-4">
                 <button type="submit" class="btn btn-primary">Search!</button>
             </div>
         </div>
