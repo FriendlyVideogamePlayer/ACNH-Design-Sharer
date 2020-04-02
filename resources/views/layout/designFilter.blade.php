@@ -30,7 +30,7 @@
                     </select>
             </div>
 
-            <div class="col-xs-12 col-md-2 pb-2 pt-2 mt-4">
+            <div class="col-xs-12 col-md-2 pt-2 mt-4">
                 <button type="submit" class="btn btn-primary">Search!</button>
             </div>
         </div>
